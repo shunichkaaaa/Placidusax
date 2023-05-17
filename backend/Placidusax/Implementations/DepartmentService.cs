@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Placidusax.Data;
 using Placidusax.Data.DBModels;
 using Placidusax.Interfaces;
@@ -55,12 +56,12 @@ public class DepartmentService : IDepartmentService
 
         if (existingDepartment == null) throw new ArgumentNullException("Such department doesn't exist");
 
+        var users = await _placidusaxDbContext.Users.Where(x => x.DepartmentName == existingDepartment.Name).ToListAsync();
+
         existingDepartment.Name = department.Name;
 
         _unitOfWork.Repository<Department>().Update(existingDepartment);
         await _unitOfWork.SaveChangesAsync();
-
-        var users = await _unitOfWork.Repository<User>().GetAllAsync();
 
         foreach (var user in users)
         {

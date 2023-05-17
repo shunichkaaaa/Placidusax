@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Placidusax.Data;
 
@@ -11,9 +12,11 @@ using Placidusax.Data;
 namespace Placidusax.Migrations
 {
     [DbContext(typeof(PlacidusaxDbContext))]
-    partial class PlacidusaxDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517192213_changed_date_field_to_string")]
+    partial class changed_date_field_to_string
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
