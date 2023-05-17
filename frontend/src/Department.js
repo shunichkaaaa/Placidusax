@@ -8,8 +8,8 @@ export class Department extends Component {
     this.state = {
       departments: [],
       modalTitle: "",
-      DepartmentName: "",
-      DepartmentId: 0,
+      name: "",
+      id: 0,
 
       DepartmentIdFilter: "",
       DepartmentNameFilter: "",
@@ -25,10 +25,12 @@ export class Department extends Component {
       el
     ) {
       return (
-        el.DepartmentId.toString()
+        el.id
+          .toString()
           .toLowerCase()
           .includes(DepartmentIdFilter.toString().trim().toLowerCase()) &&
-        el.DepartmentName.toString()
+        el.name
+          .toString()
           .toLowerCase()
           .includes(DepartmentNameFilter.toString().trim().toLowerCase())
       );
@@ -71,21 +73,21 @@ export class Department extends Component {
   }
 
   changeDepartmentName = (e) => {
-    this.setState({ DepartmentName: e.target.value });
+    this.setState({ name: e.target.value });
   };
 
   addClick() {
     this.setState({
       modalTitle: "Add Department",
-      DepartmentId: 0,
-      DepartmentName: "",
+      id: 0,
+      name: "",
     });
   }
   editClick(dep) {
     this.setState({
       modalTitle: "Edit Department",
-      DepartmentId: dep.DepartmentId,
-      DepartmentName: dep.DepartmentName,
+      id: dep.id,
+      name: dep.name,
     });
   }
 
@@ -97,7 +99,7 @@ export class Department extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        DepartmentName: this.state.DepartmentName,
+        name: this.state.name,
       }),
     })
       .then((res) => res.json())
@@ -120,8 +122,8 @@ export class Department extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        DepartmentId: this.state.DepartmentId,
-        DepartmentName: this.state.DepartmentName,
+        id: this.state.id,
+        name: this.state.name,
       }),
     })
       .then((res) => res.json())
@@ -159,8 +161,7 @@ export class Department extends Component {
   }
 
   render() {
-    const { departments, modalTitle, DepartmentId, DepartmentName } =
-      this.state;
+    const { departments, modalTitle, id, name } = this.state;
 
     return (
       <div>
@@ -187,7 +188,7 @@ export class Department extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("DepartmentId", true)}
+                    onClick={() => this.sortResult("id", true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +205,7 @@ export class Department extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("DepartmentId", false)}
+                    onClick={() => this.sortResult("name", false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +232,7 @@ export class Department extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("DepartmentName", true)}
+                    onClick={() => this.sortResult("name", true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +249,7 @@ export class Department extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("DepartmentName", false)}
+                    onClick={() => this.sortResult("name", false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -269,9 +270,9 @@ export class Department extends Component {
           </thead>
           <tbody>
             {departments.map((dep) => (
-              <tr key={dep.DepartmentId}>
-                <td>{dep.DepartmentId}</td>
-                <td>{dep.DepartmentName}</td>
+              <tr key={dep.id}>
+                <td>{dep.id}</td>
+                <td>{dep.name}</td>
                 <td>
                   <button
                     type="button"
@@ -299,7 +300,7 @@ export class Department extends Component {
                   <button
                     type="button"
                     className="btn btn-light mr-1"
-                    onClick={() => this.deleteClick(dep.DepartmentId)}
+                    onClick={() => this.deleteClick(dep.id)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -342,12 +343,12 @@ export class Department extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={DepartmentName}
+                    value={name}
                     onChange={this.changeDepartmentName}
                   />
                 </div>
 
-                {DepartmentId == 0 ? (
+                {id == 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -357,7 +358,7 @@ export class Department extends Component {
                   </button>
                 ) : null}
 
-                {DepartmentId != 0 ? (
+                {id != 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
