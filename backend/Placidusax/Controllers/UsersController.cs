@@ -95,7 +95,7 @@ public class UsersController : ControllerBase
         }
         catch (Exception)
         {
-            return new JsonResult("anonymous.pnh");
+            return new JsonResult("anonymous.png");
         }
     }
 }

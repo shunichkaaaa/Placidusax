@@ -9,7 +9,7 @@ public class UserResponseModel
 
     public string UserName { get; set; }
 
-    public DateTime DateOfJoin { get; set; }
+    public string DateOfJoin { get; set; }
 
     public string DepartmentName { get; set; }
 
