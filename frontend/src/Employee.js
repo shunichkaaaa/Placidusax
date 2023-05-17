@@ -122,7 +122,7 @@ export class Employee extends Component {
 
   deleteClick(id) {
     if (window.confirm("Are you sure?")) {
-      fetch(variables.API_URL + "employee/" + id, {
+      fetch(variables.API_URL + "employee?id=" + id, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -154,7 +154,7 @@ export class Employee extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ PhotoFileName: data });
+        this.setState({ photoFileName: data });
       });
   };
 
