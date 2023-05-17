@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Placidusax.Data;
 using Placidusax.Data.DBModels;
 using Placidusax.Interfaces;
 using Placidusax.Models.RequestModels;
@@ -8,14 +9,20 @@ namespace Placidusax.Implementations;
 public class DepartmentService : IDepartmentService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly PlacidusaxDbContext _placidusaxDbContext;
 
-    public DepartmentService(IUnitOfWork unitOfWork)
+    public DepartmentService(IUnitOfWork unitOfWork, PlacidusaxDbContext placidusaxDbContext)
     {
         _unitOfWork = unitOfWork;
+        _placidusaxDbContext = placidusaxDbContext;
     }
 
     public async Task<Department> CreateDepartment(DepartmentRequestModel department)
     {
+        var existingDepartment = _placidusaxDbContext.Departments.Where(x => x.Name == department.Name).FirstOrDefault();
+
+        if (existingDepartment != null || existingDepartment.IsDeleted) throw new ArgumentException("Department with such name already exists");
+
         var newDepartment = new Department();
 
         newDepartment.Name = department.Name;

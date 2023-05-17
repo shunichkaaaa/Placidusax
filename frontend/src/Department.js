@@ -8,8 +8,8 @@ export class Department extends Component {
     this.state = {
       departments: [],
       modalTitle: "",
-      DepartmentName: "",
-      DepartmentId: 0,
+      name: "",
+      id: 0,
 
       DepartmentIdFilter: "",
       DepartmentNameFilter: "",
@@ -62,7 +62,8 @@ export class Department extends Component {
     fetch(variables.API_URL + "department")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ departments: data, departmentsWithoutFilter: data });
+          this.setState({ departments: data, departmentsWithoutFilter: data });
+          console.log(data);
       });
   }
 
@@ -71,21 +72,21 @@ export class Department extends Component {
   }
 
   changeDepartmentName = (e) => {
-    this.setState({ DepartmentName: e.target.value });
+    this.setState({ name: e.target.value });
   };
 
   addClick() {
     this.setState({
       modalTitle: "Add Department",
-      DepartmentId: 0,
-      DepartmentName: "",
+      id: 0,
+      name: "",
     });
   }
   editClick(dep) {
     this.setState({
       modalTitle: "Edit Department",
-      DepartmentId: dep.DepartmentId,
-      DepartmentName: dep.DepartmentName,
+      id: dep.id,
+      name: dep.name,
     });
   }
 
@@ -97,7 +98,7 @@ export class Department extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        DepartmentName: this.state.DepartmentName,
+        name: this.state.name,
       }),
     })
       .then((res) => res.json())
@@ -159,7 +160,7 @@ export class Department extends Component {
   }
 
   render() {
-    const { departments, modalTitle, DepartmentId, DepartmentName } =
+    const { departments, modalTitle, id, name } =
       this.state;
 
     return (
@@ -269,9 +270,9 @@ export class Department extends Component {
           </thead>
           <tbody>
             {departments.map((dep) => (
-              <tr key={dep.DepartmentId}>
-                <td>{dep.DepartmentId}</td>
-                <td>{dep.DepartmentName}</td>
+              <tr key={dep.id}>
+                <td>{dep.id}</td>
+                <td>{dep.name}</td>
                 <td>
                   <button
                     type="button"
@@ -342,12 +343,12 @@ export class Department extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={DepartmentName}
+                    value={name}
                     onChange={this.changeDepartmentName}
                   />
                 </div>
 
-                {DepartmentId == 0 ? (
+                {id == 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -357,7 +358,7 @@ export class Department extends Component {
                   </button>
                 ) : null}
 
-                {DepartmentId != 0 ? (
+                {id != 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"

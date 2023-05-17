@@ -7,7 +7,7 @@ using Placidusax.Models.RequestModels;
 namespace Placidusax.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/department")]
 public class DepartmentsController : ControllerBase
 {
     private readonly IDepartmentService _departmentService;

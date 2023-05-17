@@ -43,7 +43,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<JsonResult> GetAll()
     {
         var users = await _userService.GetAllUsers();
 
@@ -54,7 +54,7 @@ public class UsersController : ControllerBase
             resultUsersList.Add(_mapper.Map<UserResponseModel>(user));
         }
 
-        return Ok(resultUsersList);
+        return new JsonResult(resultUsersList);
     }
 
     [HttpPut]
