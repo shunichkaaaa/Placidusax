@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Home } from "./Home";
+import { Department } from "./Department";
+import { Employee } from "./Employee";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header>
+          <Navbar bg="dark" variant="dark" expand="lg">
+            <Container>
+              <Navbar.Brand href="home">Placidusax</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link href="home">Home</Nav.Link>
+                  <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="department">
+                      Department
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="employee">
+                      Employee
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        </header>
+
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/department" element={<Department />} />
+          <Route path="/employee" element={<Employee />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
