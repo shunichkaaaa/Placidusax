@@ -106,7 +106,7 @@ export class Department extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          alert(result);
+          alert("Successful");
           this.refreshList();
         },
         (error) => {
@@ -130,7 +130,7 @@ export class Department extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          alert(result);
+          alert("Successful");
           this.refreshList();
         },
         (error) => {
@@ -141,7 +141,7 @@ export class Department extends Component {
 
   deleteClick(id) {
     if (window.confirm("Are you sure?")) {
-      fetch(variables.API_URL + "department/" + id, {
+      fetch(variables.API_URL + "department?id=" + id, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -151,7 +151,7 @@ export class Department extends Component {
         .then((res) => res.json())
         .then(
           (result) => {
-            alert(result);
+            alert("Successful");
             this.refreshList();
           },
           (error) => {

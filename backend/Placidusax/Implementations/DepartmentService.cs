@@ -19,9 +19,9 @@ public class DepartmentService : IDepartmentService
 
     public async Task<Department> CreateDepartment(DepartmentRequestModel department)
     {
-        var existingDepartment = _placidusaxDbContext.Departments.Where(x => x.Name == department.Name).FirstOrDefault();
+        var existingDepartment = _placidusaxDbContext.Departments.Where(x => !x.IsDeleted && x.Name == department.Name).FirstOrDefault();
 
-        if (existingDepartment != null || existingDepartment.IsDeleted) throw new ArgumentException("Department with such name already exists");
+        if (existingDepartment != null) throw new ArgumentException("Department with such name already exists");
 
         var newDepartment = new Department();
 

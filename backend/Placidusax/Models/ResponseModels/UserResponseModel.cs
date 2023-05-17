@@ -11,8 +11,6 @@ public class UserResponseModel
 
     public DateTime DateOfJoin { get; set; }
 
-    public Guid DepartmentId { get; set; }
-
     public string DepartmentName { get; set; }
 
     public string PhotoFileName { get; set; }
