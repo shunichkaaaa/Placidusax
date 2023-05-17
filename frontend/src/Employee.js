@@ -9,11 +9,11 @@ export class Employee extends Component {
       departments: [],
       employees: [],
       modalTitle: "",
-      EmployeeId: 0,
-      EmployeeName: "",
-      Department: "",
-      DateOfJoining: "",
-      PhotoFileName: "anonymous.png",
+      id: 0,
+      userName: "",
+      departmentName: "",
+      dateOfJoin: "",
+      photoFileName: "anonymous.png",
       PhotoPath: variables.PHOTO_URL,
     };
   }
@@ -37,33 +37,33 @@ export class Employee extends Component {
   }
 
   changeEmployeeName = (e) => {
-    this.setState({ EmployeeName: e.target.value });
+    this.setState({ userName: e.target.value });
   };
   changeDepartment = (e) => {
-    this.setState({ Department: e.target.value });
+    this.setState({ departmentName: e.target.value });
   };
   changeDateOfJoining = (e) => {
-    this.setState({ DateOfJoining: e.target.value });
+    this.setState({ dateOfJoin: e.target.value });
   };
 
   addClick() {
     this.setState({
       modalTitle: "Add Employee",
-      EmployeeId: 0,
-      EmployeeName: "",
-      Department: "",
-      DateOfJoining: "",
-      PhotoFileName: "anonymous.png",
+      id: 0,
+      userName: "",
+      departmentName: "",
+      dateOfJoin: "",
+      photoFileName: "anonymous.png",
     });
   }
   editClick(emp) {
     this.setState({
       modalTitle: "Edit Employee",
-      EmployeeId: emp.EmployeeId,
-      EmployeeName: emp.EmployeeName,
-      Department: emp.Department,
-      DateOfJoining: emp.DateOfJoining,
-      PhotoFileName: emp.PhotoFileName,
+      id: emp.id,
+      userName: emp.userName,
+      departmentName: emp.departmentName,
+      dateOfJoin: emp.dateOfJoin,
+      photoFileName: emp.photoFileName,
     });
   }
 
@@ -75,16 +75,16 @@ export class Employee extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        EmployeeName: this.state.EmployeeName,
-        Department: this.state.Department,
-        DateOfJoining: this.state.DateOfJoining,
-        PhotoFileName: this.state.PhotoFileName,
+        userName: this.state.userName,
+        departmentName: this.state.departmentName,
+        dateOfJoin: this.state.dateOfJoin,
+        photoFileName: this.state.photoFileName,
       }),
     })
       .then((res) => res.json())
       .then(
         (result) => {
-          alert(result);
+          alert("Successful");
           this.refreshList();
         },
         (error) => {
@@ -101,17 +101,17 @@ export class Employee extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        EmployeeId: this.state.EmployeeId,
-        EmployeeName: this.state.EmployeeName,
-        Department: this.state.Department,
-        DateOfJoining: this.state.DateOfJoining,
-        PhotoFileName: this.state.PhotoFileName,
+        id: this.state.id,
+        userName: this.state.userName,
+        departmentName: this.state.departmentName,
+        dateOfJoin: this.state.dateOfJoin,
+        photoFileName: this.state.photoFileName,
       }),
     })
       .then((res) => res.json())
       .then(
         (result) => {
-          alert(result);
+          alert("Successful");
           this.refreshList();
         },
         (error) => {
@@ -132,7 +132,7 @@ export class Employee extends Component {
         .then((res) => res.json())
         .then(
           (result) => {
-            alert(result);
+            alert("Successful");
             this.refreshList();
           },
           (error) => {
@@ -163,12 +163,12 @@ export class Employee extends Component {
       departments,
       employees,
       modalTitle,
-      EmployeeId,
-      EmployeeName,
-      Department,
-      DateOfJoining,
+      id,
+      userName,
+      departmentName,
+      dateOfJoin,
       PhotoPath,
-      PhotoFileName,
+      photoFileName,
     } = this.state;
 
     return (
@@ -194,11 +194,11 @@ export class Employee extends Component {
           </thead>
           <tbody>
             {employees.map((emp) => (
-              <tr key={emp.EmployeeId}>
-                <td>{emp.EmployeeId}</td>
-                <td>{emp.EmployeeName}</td>
-                <td>{emp.Department}</td>
-                <td>{emp.DateOfJoining}</td>
+              <tr key={emp.id}>
+                <td>{emp.id}</td>
+                <td>{emp.userName}</td>
+                <td>{emp.departmentName}</td>
+                <td>{emp.dateOfJoin}</td>
                 <td>
                   <button
                     type="button"
@@ -226,7 +226,7 @@ export class Employee extends Component {
                   <button
                     type="button"
                     className="btn btn-light mr-1"
-                    onClick={() => this.deleteClick(emp.EmployeeId)}
+                    onClick={() => this.deleteClick(emp.id)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +271,7 @@ export class Employee extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        value={EmployeeName}
+                        value={userName}
                         onChange={this.changeEmployeeName}
                       />
                     </div>
@@ -281,12 +281,10 @@ export class Employee extends Component {
                       <select
                         className="form-select"
                         onChange={this.changeDepartment}
-                        value={Department}
+                        value={departmentName}
                       >
                         {departments.map((dep) => (
-                          <option key={dep.DepartmentId}>
-                            {dep.DepartmentName}
-                          </option>
+                          <option key={dep.id}>{dep.name}</option>
                         ))}
                       </select>
                     </div>
@@ -296,7 +294,7 @@ export class Employee extends Component {
                       <input
                         type="date"
                         className="form-control"
-                        value={DateOfJoining}
+                        value={dateOfJoin}
                         onChange={this.changeDateOfJoining}
                       />
                     </div>
@@ -305,7 +303,7 @@ export class Employee extends Component {
                     <img
                       width="250px"
                       height="250px"
-                      src={PhotoPath + PhotoFileName}
+                      src={PhotoPath + photoFileName}
                     />
                     <input
                       className="m-2"
@@ -315,7 +313,7 @@ export class Employee extends Component {
                   </div>
                 </div>
 
-                {EmployeeId == 0 ? (
+                {id == 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -325,7 +323,7 @@ export class Employee extends Component {
                   </button>
                 ) : null}
 
-                {EmployeeId != 0 ? (
+                {id != 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
