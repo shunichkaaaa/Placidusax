@@ -283,8 +283,11 @@ export class Employee extends Component {
                         onChange={this.changeDepartment}
                         value={departmentName}
                       >
+                        <option value="">Select Department</option>
                         {departments.map((dep) => (
-                          <option key={dep.id}>{dep.name}</option>
+                          <option key={dep.id} value={dep.name}>
+                            {dep.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -322,7 +325,6 @@ export class Employee extends Component {
                     Create
                   </button>
                 ) : null}
-
                 {id != 0 ? (
                   <button
                     type="button"
