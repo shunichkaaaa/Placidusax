@@ -245,12 +245,7 @@ export class Employee extends Component {
           </tbody>
         </table>
 
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-hidden="true"
-        >
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
@@ -303,20 +298,12 @@ export class Employee extends Component {
                     </div>
                   </div>
                   <div className="p-2 w-50 bd-highlight">
-                    <img
-                      width="250px"
-                      height="250px"
-                      src={PhotoPath + photoFileName}
-                    />
-                    <input
-                      className="m-2"
-                      type="file"
-                      onChange={this.imageUpload}
-                    />
+                    <img width="250px" height="250px" src={PhotoPath + photoFileName} />
+                    <input className="m-2" type="file" onChange={this.imageUpload} />
                   </div>
                 </div>
 
-                {id == 0 ? (
+                {id === 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -325,7 +312,7 @@ export class Employee extends Component {
                     Create
                   </button>
                 ) : null}
-                {id != 0 ? (
+                {id !== 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"

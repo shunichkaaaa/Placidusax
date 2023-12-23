@@ -20,6 +20,7 @@ export class Department extends Component {
   FilterFn() {
     let DepartmentIdFilter = this.state.DepartmentIdFilter;
     let DepartmentNameFilter = this.state.DepartmentNameFilter;
+    //console.log(DepartmentIdFilter);
 
     let filteredData = this.state.departmentsWithoutFilter.filter(function (el) {
       return (
@@ -342,7 +343,7 @@ export class Department extends Component {
                   />
                 </div>
 
-                {id == 0 ? (
+                {id === 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -352,7 +353,7 @@ export class Department extends Component {
                   </button>
                 ) : null}
 
-                {id != 0 ? (
+                {id !== 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
