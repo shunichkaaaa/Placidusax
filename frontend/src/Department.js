@@ -18,12 +18,10 @@ export class Department extends Component {
   }
 
   FilterFn() {
-    var DepartmentIdFilter = this.state.DepartmentIdFilter;
-    var DepartmentNameFilter = this.state.DepartmentNameFilter;
+    let DepartmentIdFilter = this.state.DepartmentIdFilter;
+    let DepartmentNameFilter = this.state.DepartmentNameFilter;
 
-    var filteredData = this.state.departmentsWithoutFilter.filter(function (
-      el
-    ) {
+    let filteredData = this.state.departmentsWithoutFilter.filter(function (el) {
       return (
         el.id
           .toString()
@@ -40,7 +38,7 @@ export class Department extends Component {
   }
 
   sortResult(prop, asc) {
-    var sortedData = this.state.departmentsWithoutFilter.sort(function (a, b) {
+    let sortedData = this.state.departmentsWithoutFilter.sort(function (a, b) {
       if (asc) {
         return a[prop] > b[prop] ? 1 : a[prop] < b[prop] ? -1 : 0;
       } else {
@@ -64,8 +62,8 @@ export class Department extends Component {
     fetch(variables.API_URL + "department")
       .then((response) => response.json())
       .then((data) => {
-          this.setState({ departments: data, departmentsWithoutFilter: data });
-          console.log(data);
+        this.setState({ departments: data, departmentsWithoutFilter: data });
+        console.log(data);
       });
   }
 
@@ -162,8 +160,7 @@ export class Department extends Component {
   }
 
   render() {
-    const { departments, modalTitle, id, name } =
-      this.state;
+    const { departments, modalTitle, id, name } = this.state;
 
     return (
       <div>
@@ -321,12 +318,7 @@ export class Department extends Component {
           </tbody>
         </table>
 
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-hidden="true"
-        >
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
